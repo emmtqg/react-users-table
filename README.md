@@ -11,7 +11,7 @@ Searchable React Table with detail page (lists user's posts).
 This amazing react table:
       <ul>
         <li>Features a single presentational component to display variable json data</li>
-        <li><b>*Fully*<b> configurable with an external json file to define json fields displayed, display names for fields, column widths, text alignment, title definition</li>
+        <li><b>*Fully*</b> configurable with an external json file to define json fields displayed, display names for fields, column widths, text alignment, title definition</li>
         <li>Uses <b>redux and thunk</b> to facilitate asynchronous data fetching from configurable api endpoints</li>
         <li>Uses <b>Bootstrap 4</b> and most modules are implemented with typescript</li>
         <li>Based from the create-react-app with typescript</li>
