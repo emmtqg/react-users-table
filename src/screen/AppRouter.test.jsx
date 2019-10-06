@@ -48,25 +48,25 @@ const LocationDisplay = withRouter(({ location }) => (
 ))
 
 // TODO: Research Route outside of Router error
-// Create Home page
-const renderWithRouter = (route) => {
-  render( 
-    <Provider store={store}>
-      <MemoryRouter initialEntries={[route]}>
+const renderWithRouter = (children, route="/") => {
+  const history = createMemoryHistory(route);
+  return render(<Router history={history}>{children}</Router>)
+}
+
+const App = () => {
+  return (
         <div className="App">
           <Route exact path="/" component={UserPageStub} />        
-          <Route path="/posts/:userId" component={PostPageStub} />
+          <Route path="/posts/2" component={PostPageStub} />
         </div>
-      </MemoryRouter>
-    </Provider>
-  )
+    );
 }
 
 describe('App router for User/Post pages', () => {
 
   xit('base url should default to the user page ', () => {
-    const route = "/";
-    const { container } = render(renderWithRouter(route));
+    const route = ["/"];
+    const { container } = renderWithRouter(<App />, route);
       
     // verify page content for expected route
     // often you'd use a data-testid or role query, but this is also possible
@@ -74,11 +74,11 @@ describe('App router for User/Post pages', () => {
   });
 
   xit('should route to Post of user when url updates', () => {
-    const route = `/posts/${testUser[0].id}`;
-    const { postContainer } = renderWithRouter(route);
-  
+    const user = testUser[0].id;
+    const route = [`/posts/${user}`];
+    const { container } = renderWithRouter(<App />, route); 
     // check that the content changed to the new page
-    expect(postContainer.innerHTML).toContain(testPost[0].title);
+    expect(container.innerHTML).toContain(testPost[0].title);
   });
   
   xit('should should render the Post page for the selected user', () => {

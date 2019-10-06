@@ -105,7 +105,6 @@ class UsersTableWrapper extends Component {
   render() {
     return (
       <>
-    }
       {/* Title (from config file) */}
       <h1 className="display-5 text-center">{TableConfig.title}</h1>
       {/* Search Bar */}

@@ -36,7 +36,7 @@ The main functional component in this small application is a react table that ca
 
 <caption>src/config/Users.json file</caption>
 
-There are two table wrapper presentational components in src/screen: UsersTableWrapper and PostsTableWrapper that pass the interaction callbacks (filtering and url redirection), configuration and data to the GeneralTable stateless component. They provide the api load requests and response handling via the actions/reducers from  redux and thunk for the async functionality.
+There are two table wrapper presentational components in src/screen: UsersTableWrapper and PostsTableWrapper that pass the interaction callbacks (filtering and url redirection), configuration and data to the GeneralTable stateless component (dependency injection - easy testing for the General Table component which just handles the data view and invokes the callbacks on user clicks to the parent). They provide the api load requests and response handling via the actions/reducers from  redux and thunk for the async functionality.
 
 The search bar provides a very rudimentary data filter function on all the cell data as the filter's text input is updated. There is a checkbox that will enable case sensitive searches (the default is case-insensitive).
 
