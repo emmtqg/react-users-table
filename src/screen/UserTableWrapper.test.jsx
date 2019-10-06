@@ -17,66 +17,48 @@ import reduxThunkReducer from '../reducers/reducer';
 import fetchUsersAction from '../actions/actionUsers';
 
 import GeneralTable from '../components/GeneralTable/GeneralTable';
-import UserTableConfig from '../config/userConfig';
+import userConfig from '../config/userConfig';
 import PostTableConfig from '../config/postConfig';
-import { testUser } from '../utils/testUser';
-
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { faSpinner, faSearch } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import UsersTableWrapper from './UsersTableWrapper';
+import testUser from '../utils/testUser';
+import UserTableWrapper from './UserTableWrapper';
 
 const fetchUsersMock = jest.mock(fetchUsersAction, () => {
   return testUser;
 });
 
-// library.add(faSpinner, faSearch);
-// const fontAwesomeCoreMock = jest.mock('@fortawesome/fontawesome-svg-core');
-// const fontAwesomeIconMock = jest.mock('@fortawesome/free-solid-svg-icons');
-// const fontAwesomeMock = jest.mock('@fortawesome/react-fontawesome');
+const createTestStore = () => {
+  const middlewares = [thunk];
+  const initialState = {
+    items: null,
+    itemsPosts: null,
+    pending: true,
+    error: false,
+    pendingPosts: true,
+    errorPosts: false,
+  };
 
-const historyMock = jest.fn(() => {
-  return true;
-});
+  const store = createStore(reduxThunkReducer, initialState, applyMiddleware(...middlewares));;
 
-// item for UserType test
-let userTableProps = {
-  items: testUser,
-  tableConfig: {...UserTableConfig},
-  pending: false,
-  error: false,
-  onRowClick: historyMock,
-  captionText: "Users"
-};
+  return store;
+}
 
 describe('User Table Wrapper ', () => {
   test('Loading will initiate an API call and waits for Users array to be returned', async () => {
-    const middlewares = [thunk];
-    const initialState = {
-      items: null,
-      itemsPosts: null,
-      pending: true,
-      error: false,
-      pendingPosts: true,
-      errorPosts: false,
-    };
-    const store = createStore(reduxThunkReducer, initialState, applyMiddleware(...middlewares));;
-      expect.assertions(1);
-    
-      // fetchUsersMock.mock();
+
+    expect.assertions(1);
+
     const App = () => {
       return(
-      <Provider store={store}>
-        <UsersTableWrapper store={store} />
+      <Provider store={createTestStore()}>
+        <UserTableWrapper />
       </Provider>)
     };
 
-      const { getByText } = render(<App />);
-      
-      await wait(() => {
-          expect(getByText(/howell/i)).toBeTruthy();
-      });
+    const { getByText } = render(<App />);
+    var regex = new RegExp(testUser[0].name, "i");
+    await wait(() => {
+        expect(getByText(regex)).toBeTruthy();
+    });
   });
 
   it('loads the test user initially with no filter', () => {

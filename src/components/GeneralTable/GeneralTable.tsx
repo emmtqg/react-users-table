@@ -35,16 +35,20 @@ const Users: React.FC<UsersProps> = (props) => {
   return(
     <>
     {!error && !pending && !noItems &&
-    (<table className="table table-responsive w-100 d-block d-md-table table-striped table-hover center">
+    (<div className="table-responsive">
+      <table className="table w-100 d-block d-md-table table-striped table-hover center">
       <thead className="thead">
         <tr className="row d-flex align-items-stretch">
         {!pending && !error && 
-         tableHeaders.map( (header, i) => 
+         tableHeaders.map( (header, i) => {
+          let col = (cols[i]===-1) ? "col" : `col-${cols[i]}`;
+          return(
           <th
-            className={`col-${cols[i]} text-center`}
+            className={`${col} text-center`}
             id={`${header.field}`}
             key={`${header.field}`}>{header.display}
-          </th>
+          </th>)
+        }
         )}
         </tr>
       </thead>
@@ -61,17 +65,18 @@ const Users: React.FC<UsersProps> = (props) => {
           >
             {tableHeaders
             .map((header, i:number) => {
+              let col = (cols[i]===-1) ? "col" : `col-${cols[i]}`;
               return(
               <td 
               key={`${item.id}_h_${i}`} 
-              className={`text-${alignments[i]} col-${cols[i]}`}  
+              className={`text-${alignments[i]} ${col}`}  
               >{getFieldValue(item, header)}</td>)
             })}
           </tr>
         ))
       }
       </tbody>
-    </table>
+    </table></div>
     )}
     <hr />
     {!error && !pending && (

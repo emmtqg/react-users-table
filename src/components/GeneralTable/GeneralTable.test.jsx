@@ -14,7 +14,7 @@ import GeneralTable from './GeneralTable';
 import { userConfig as UserTableConfig } from '../../config/userConfig';
 import { postConfig as PostTableConfig } from '../../config/postConfig';
 import testUser from '../../utils/testUser';
-import testPost from '../../utils/testPost';
+import testPost from '../../utils/testPosts';
 
 const historyMock = jest.fn(() => {
   return true;

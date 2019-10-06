@@ -14,6 +14,7 @@ This amazing react table:
         <li><b>*Fully*</b> configurable with an external json file to define json fields displayed, display names for fields, column widths, text alignment, title definition</li>
         <li>Uses <b>redux and thunk</b> to facilitate asynchronous data fetching from configurable api endpoints</li>
         <li>Uses <b>Bootstrap 4</b> and most modules are implemented with typescript</li>
+        <li>Responsive tables are implemented by entering a "-1" value in the col specification in the config file. This allows a narrow browser to wrap the table and provide horizontal scrolling if necessary.
         <li>Based from the create-react-app with typescript</li>
         <li>Features a <b>case-sensitivity mode checkbox</b> to enable/disable case sensitive searches using  lodash for speed and efficiency</li>
 

@@ -9,7 +9,7 @@ import {getUsersError, getUsers, getUsersPending} from '../reducers/reducer';
 import Users from '../components/GeneralTable/GeneralTable';
 import { userConfig as tableConfig } from '../config/userConfig';
 
-class UsersTableWrapper extends Component {
+class UserTableWrapper extends Component {
   constructor(props) {
     super(props);
 
@@ -162,4 +162,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UsersTableWrapper);
+)(UserTableWrapper);

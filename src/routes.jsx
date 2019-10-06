@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './components/App';
-import UserTableWrapper from './screen/UsersTableWrapper';
+import UserTableWrapper from './screen/UserTableWrapper';
 import PostTableWrapper from './screen/PostsTableWrapper';
 
 export default (

@@ -1,4 +1,4 @@
-[{
+export const users = [{
     "id": 1,
     "name": "Leanne Graham",
     "username": "Bret",
@@ -227,4 +227,6 @@
       "catchPhrase": "Centralized empowering task-force",
       "bs": "target end-to-end models"
     }
-}]
+}];
+
+export default users;

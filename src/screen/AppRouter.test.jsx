@@ -41,4 +41,9 @@ describe("App router for User/Post pages", () => {
     const utils = renderWithRouter(<Routes />, route);
     utils.getByText("Posts");
   });
+
+  test('landing on a bad page shows 404 page', () => {
+    const page = renderWithRouter(<Routes />, ['/some/bad/route']);
+    page.getByText("404");
+  })
 });

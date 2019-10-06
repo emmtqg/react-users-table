@@ -5,7 +5,7 @@ export const postConfig = {
     { "field": "body", "display": "Body" }
   ],
   "alignments": [ "left", "center" ],
-  "cols": [ 4, 8 ],
+  "cols": [ 4, -8 ],
   "title": "Posts"
 };
 

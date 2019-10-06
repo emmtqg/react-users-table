@@ -7,7 +7,7 @@ export const userConfig = {
     { "field": "company.name", "display": "Company"}
   ],
   "alignments": [ "left", "center", "right", "right" ],
-  "cols": [ 3, 3, 2, 4 ],
+  "cols": [ 3, -1, 2, 4 ],
   "title": "Users",
   "searchCaseSensitive": false
 };
