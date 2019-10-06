@@ -1,4 +1,4 @@
-{
+export const userConfig = {
   "apiUrl": "https://jsonplaceholder.typicode.com/users",
   "headers": [ 
     { "field": "name", "display": "Name" }, 
@@ -10,4 +10,6 @@
   "cols": [ 3, 3, 2, 4 ],
   "title": "Users",
   "searchCaseSensitive": false
-}
+};
+
+export default userConfig;

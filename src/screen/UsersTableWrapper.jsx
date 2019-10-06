@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import fetchUsersAction from '../utils/fetchUsers';
 import {getUsersError, getUsers, getUsersPending} from '../reducers/reducer';
 import Users from '../components/GeneralTable/GeneralTable';
-import TableConfig from '../config/Users.json';
+import { userConfig as tableConfig } from '../config/userConfig';
 
 class UsersTableWrapper extends Component {
   constructor(props) {
@@ -16,11 +16,11 @@ class UsersTableWrapper extends Component {
     this.state = { 
       filterStr: '',
       filter: false,
-      searchCaseSensitive: TableConfig.searchCaseSensitive,
+      searchCaseSensitive: tableConfig.searchCaseSensitive,
       displayedUsers: [],
     }
 
-    this.tableHeaders = TableConfig.headers;
+    this.tableHeaders = tableConfig.headers;
     
     this.onChangeFilterStr = this.onChangeFilterStr.bind(this);
     this.hasFilterString = this.hasFilterString.bind(this);
@@ -106,7 +106,7 @@ class UsersTableWrapper extends Component {
     return (
       <>
       {/* Title (from config file) */}
-      <h1 className="display-5 text-center">{TableConfig.title}</h1>
+      <h1 className="display-5 text-center">{tableConfig.title}</h1>
       {/* Search Bar */}
         <div className="header-area row d-flex align-items-center">
           <div className="col-6">
@@ -138,7 +138,7 @@ class UsersTableWrapper extends Component {
           items={this.state.displayedUsers}
           pending={this.props.pending}
           error={this.props.error}
-          tableConfig={TableConfig}
+          tableConfig={tableConfig}
           onRowClick={this.onRowClick}
           captionText="Users"
         />

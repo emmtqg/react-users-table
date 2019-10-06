@@ -1,11 +1,11 @@
 import { fetchUsersPending, fetchUsersSuccess, fetchUsersError } from '../actions/actionUsers';
-import { apiUrl } from '../config/Users.json';
+import userConfig from '../config/userConfig';
 
 function fetchUsers() {
     return dispatch => {
         dispatch(fetchUsersPending());
 
-        fetch(apiUrl)
+        fetch(userConfig.apiUrl)
         .then(res => res.json())
         .then(res => {
             if(!res.length) {

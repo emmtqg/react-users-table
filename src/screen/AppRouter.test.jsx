@@ -1,30 +1,15 @@
-import React from 'react';
-
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { withRouter, MemoryRouter} from 'react-router'
-
-import { createMemoryHistory } from 'history'
+import * as React from "react";
+import { MemoryRouter as Router } from "react-router-dom";
 
 import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import reduxThunkReducer from '../reducers/reducer';
 
-import '@testing-library/jest-dom/extend-expect'
-import { render, fireEvent, waitForDomChange } from '@testing-library/react'
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSpinner, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { render } from "@testing-library/react";
 
-import UserTableWrapper from './UsersTableWrapper';
-import PostsTableWrapper from './PostsTableWrapper';
-
-import UserTableConfig from '../config/Users.json';
-import PostTableConfig from '../config/Posts.json';
-import testUser from '../utils/TestUser.json';
-import testPost from '../utils/TestPost.json';
-
-// Loading/Search icons icon
-library.add(faSpinner, faSearch);
+import { testUser } from "../utils/testUser";
+import { Routes } from "./App";
 
 // Redux
 const middlewares = [thunk];
@@ -36,57 +21,24 @@ const initialState = {
   pendingPosts: true,
   errorPosts: false,
 };
-
 const store = createStore(reduxThunkReducer, initialState, applyMiddleware(...middlewares));
 
-const UserPageStub = () => (<div><h1>{UserTableConfig.title}</h1></div>);
 
-const PostPageStub = () => (<div><h1>{PostTableConfig.title}</h1></div>);
+const renderWithRouter = (children, initialEntries = ["/"]) => {
+  return render(<Provider store={store}><Router initialEntries={initialEntries}>{children}</Router></Provider>);
+};
 
-const LocationDisplay = withRouter(({ location }) => (
-  <div data-testid="location-display">{location.pathname}</div>
-))
-
-// TODO: Research Route outside of Router error
-const renderWithRouter = (children, route="/") => {
-  const history = createMemoryHistory(route);
-  return render(<Router history={history}>{children}</Router>)
-}
-
-const App = () => {
-  return (
-        <div className="App">
-          <Route exact path="/" component={UserPageStub} />        
-          <Route path="/posts/2" component={PostPageStub} />
-        </div>
-    );
-}
-
-describe('App router for User/Post pages', () => {
-
-  xit('base url should default to the user page ', () => {
+describe("App router for User/Post pages", () => {
+  it("render Users at '/'", () => {
     const route = ["/"];
-    const { container } = renderWithRouter(<App />, route);
-      
-    // verify page content for expected route
-    // often you'd use a data-testid or role query, but this is also possible
-    expect(container.innerHTML).toMatch('Users');
+    const utils = renderWithRouter(<Routes />, route);
+    utils.getByText("Users");
   });
 
-  xit('should route to Post of user when url updates', () => {
-    const user = testUser[0].id;
-    const route = [`/posts/${user}`];
-    const { container } = renderWithRouter(<App />, route); 
-    // check that the content changed to the new page
-    expect(container.innerHTML).toContain(testPost[0].title);
-  });
-  
-  xit('should should render the Post page for the selected user', () => {
-    const { container } = renderWithRoute('/');
-  
-    // verify page content for user row click
-    const titleNode = container.querySelector('h1');
-    expect(titleNode.textContent.includes(UserTableConfig.title)).toBeTruthy();
-
+  it("should render Posts at '/posts/:userId", () => {
+    const user = testUser[0];
+    const route = [`/posts/${user.id}`];
+    const utils = renderWithRouter(<Routes />, route);
+    utils.getByText("Posts");
   });
 });

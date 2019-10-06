@@ -1,12 +1,12 @@
 import { fetchPostsPending, fetchPostsSuccess, fetchPostsError } from '../actions/actionPosts';
-import { apiUrl } from '../config/Posts.json';
+import { postConfig } from '../config/postConfig';
 
 function fetchPosts(id) {
-    console.log(`Fetching url: ${apiUrl}${id}`);
+    console.log(`Fetching url: ${postConfig.apiUrl}${id}`);
     return dispatch => {
         dispatch(fetchPostsPending());
 
-        fetch(`${apiUrl}${id}`)
+        fetch(`${postConfig.apiUrl}${id}`)
         .then(res => res.json())
         .then(res => {
             if(!res.length) {

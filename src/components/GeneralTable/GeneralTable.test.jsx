@@ -11,10 +11,10 @@ import '@testing-library/jest-dom/extend-expect'
 import {render, fireEvent} from '@testing-library/react';
 
 import GeneralTable from './GeneralTable';
-import UserTableConfig from '../../config/Users.json';
-import PostTableConfig from '../../config/Posts.json';
-import testUser from '../../utils/TestUser.json';
-import testPost from '../../utils/TestPost.json';
+import { userConfig as UserTableConfig } from '../../config/userConfig';
+import { postConfig as PostTableConfig } from '../../config/postConfig';
+import testUser from '../../utils/testUser';
+import testPost from '../../utils/testPost';
 
 const historyMock = jest.fn(() => {
   return true;

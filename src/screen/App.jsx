@@ -2,7 +2,8 @@ import React from 'react';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSpinner, faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,6 +28,33 @@ const initialState = {
 };
 const store = createStore(reduxThunkReducer, initialState, applyMiddleware(...middlewares));
 
+export const Routes = () => {
+  return (
+    <Switch>
+      <Route exact path="/" component={UserTableWrapper} />
+      <Route exact path="/posts/:userId" component=
+          {PostsTableWrapper} />
+      <Route component={() => <div>404: NOT FOUND</div>} />
+    </Switch>
+  );
+};
+
+
+const NavButton = ({ style = {}, to, ...props }) => (
+  <Link
+    to={to}
+    style={{ padding: 10, border: "solid red 1px", ...style }}
+    {...props}
+  />
+);
+
+const NavBar = () => (
+  <span>
+    <NavButton to={"/"}>Home</NavButton>
+    <NavButton to={"/posts/123"}>Post: 123</NavButton>
+  </span>
+);
+
 // Router
 const App = () => {
   return (
@@ -34,8 +62,7 @@ const App = () => {
       <Router>
         <div className="App">
           <HeaderJumbo />
-          <Route exact path="/" component={UserTableWrapper} />        
-          <Route path="/posts/:userId" component={PostsTableWrapper} />
+          <Routes />
           <hr />
           <Footer />
         </div>

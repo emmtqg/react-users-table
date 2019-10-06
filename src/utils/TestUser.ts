@@ -1,4 +1,4 @@
-[{
+export const testUser = [{
   "id": 2,
   "name": "Ervin Howell",
   "username": "Antonette",
@@ -20,4 +20,6 @@
     "catchPhrase": "Proactive didactic contingency",
     "bs": "synergize scalable supply-chains"
   }
-}]
+}];
+
+export default testUser;

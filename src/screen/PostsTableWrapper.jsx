@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import fetchPostsAction from '../utils/fetchPosts';
 import { getPostsError, getPostsPending, getPosts, getUsers } from '../reducers/reducer';
 import Users from '../components/GeneralTable/GeneralTable';
-import TableConfig from '../config/Posts.json';
+import { postConfig as tableConfig } from '../config/postConfig';
 
 class PostsTableWrapper extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class PostsTableWrapper extends Component {
       userId: 0
     }
 
-    this.tableHeaders = TableConfig.headers;
+    this.tableHeaders = tableConfig.headers;
   }
 
   componentDidMount() {
@@ -56,7 +56,7 @@ class PostsTableWrapper extends Component {
     return (
       <>
       {/* Title (from config file) */}
-      <h1 className="display-5 text-center">{TableConfig.title}</h1>
+      <h1 className="display-5 text-center">{tableConfig.title}</h1>
       {/* Header */}
       <div className="d-flex header-area row">
         <div className="col-1 align-self-start">
@@ -78,7 +78,7 @@ class PostsTableWrapper extends Component {
           items={this.props.itemsPosts}
           pending={this.props.pendingPosts}
           error={this.props.errorPosts}
-          tableConfig={TableConfig}
+          tableConfig={tableConfig}
           captionText="Posts"
         />
       </>

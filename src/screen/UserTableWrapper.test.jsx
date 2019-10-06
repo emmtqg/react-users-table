@@ -14,17 +14,27 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reduxThunkReducer from '../reducers/reducer';
+import fetchUsersAction from '../actions/actionUsers';
 
 import GeneralTable from '../components/GeneralTable/GeneralTable';
-import UserTableConfig from '../config/Users.json';
-import PostTableConfig from '../config/Posts.json';
-import testUser from '../utils/TestUser.json';
-import { fetchUsersAction } from '../utils/fetchUsers';
+import UserTableConfig from '../config/userConfig';
+import PostTableConfig from '../config/postConfig';
+import { testUser } from '../utils/testUser';
+
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import { faSpinner, faSearch } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import UsersTableWrapper from './UsersTableWrapper';
 
 const fetchUsersMock = jest.mock(fetchUsersAction, () => {
   return testUser;
 });
+
+// library.add(faSpinner, faSearch);
+// const fontAwesomeCoreMock = jest.mock('@fortawesome/fontawesome-svg-core');
+// const fontAwesomeIconMock = jest.mock('@fortawesome/free-solid-svg-icons');
+// const fontAwesomeMock = jest.mock('@fortawesome/react-fontawesome');
 
 const historyMock = jest.fn(() => {
   return true;

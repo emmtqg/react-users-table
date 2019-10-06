@@ -1,4 +1,4 @@
-{
+export const postConfig = {
   "apiUrl": "https://jsonplaceholder.typicode.com/posts?userId=",
   "headers": [ 
     { "field": "title", "display": "Title" }, 
@@ -7,4 +7,6 @@
   "alignments": [ "left", "center" ],
   "cols": [ 4, 8 ],
   "title": "Posts"
-}
+};
+
+export default postConfig;
