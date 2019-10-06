@@ -21,29 +21,32 @@ const initialState = {
   pendingPosts: true,
   errorPosts: false,
 };
+
 const store = createStore(reduxThunkReducer, initialState, applyMiddleware(...middlewares));
 
-
 const renderWithRouter = (children, initialEntries = ["/"]) => {
-  return render(<Provider store={store}><Router initialEntries={initialEntries}>{children}</Router></Provider>);
+  return render(<Provider store={store}>
+    <Router initialEntries={initialEntries}>{children}</Router></Provider>);
 };
 
 describe("App router for User/Post pages", () => {
   it("render Users at '/'", () => {
     const route = ["/"];
-    const utils = renderWithRouter(<Routes />, route);
-    utils.getByText("Users");
+    const page = renderWithRouter(<Routes />, route);
+    page.getByText("Users");
   });
 
   it("should render Posts at '/posts/:userId", () => {
     const user = testUser[0];
     const route = [`/posts/${user.id}`];
-    const utils = renderWithRouter(<Routes />, route);
-    utils.getByText("Posts");
+    const page = renderWithRouter(<Routes />, route);
+    page.getByText("Posts");
   });
 
   test('landing on a bad page shows 404 page', () => {
-    const page = renderWithRouter(<Routes />, ['/some/bad/route']);
-    page.getByText("404");
-  })
+    const badRoute = '/some/bad/route';
+    const page = renderWithRouter(<Routes />, [badRoute]);
+    var regex = new RegExp(badRoute, "i");
+    page.queryByAltText(regex);
+  });
 });

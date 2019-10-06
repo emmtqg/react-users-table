@@ -9,6 +9,10 @@ body {
   margin-bottom: 60px;
 }
 
+.root {
+  position: relative;
+}
+
 .App {
   text-align: left;
   margin-top: 1rem;
@@ -110,6 +114,13 @@ tr.row {
 }
 
 /* 404 invalid url */
+.absolute-center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;  
+  z-index: 10;
+}
+
 .error-page {
   margin: 1rem auto;
   text-align: center;
