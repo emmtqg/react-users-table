@@ -37,11 +37,12 @@ The main functional component in this small application is a react table that ca
 
 <caption>src/config/userConfig file</caption>
 
+
 There are two table wrapper presentational components in src/screen: UsersTableWrapper and PostsTableWrapper that pass the interaction callbacks (filtering and url redirection), configuration and data to the GeneralTable stateless component (dependency injection - easy testing for the General Table component which just handles the data view and invokes the callbacks on user clicks to the parent). They provide the api load requests and response handling via the actions/reducers from  redux and thunk for the async functionality.
 
 The search bar provides a very rudimentary data filter function on all the cell data as the filter's text input is updated. There is a checkbox that will enable case sensitive searches (the default is case-insensitive).
 
-Each User table row is clickable and will create another Post Table which will display the user's posts. There is a home button that will reload the main User page. The post url, /posts/:userID will also display the posts for the specified user if the Id exists. It will no include the user's name in the header information (this is passed as location state via a history.push on the User page).
+Each User table row is clickable and will create another Post Table which will display the user's posts. There is a home button that will reload the main User page. The post url, /posts/:userID will also display the posts for the specified user if the Id exists. It will not include the user's name in the header information (this is passed as location state via a history.push on the User page if user row is clicked).
 
 Testing is done with Jest and the testing-library. There are a couple of smoke tests using enzyme. The tests are not currently complete - they are in progress though!
 
